@@ -1,0 +1,14 @@
+{
+  "name": "reservations",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@apollo/federation": "latest",
+    "apollo-server": "latest",
+    "async-mutex": "latest"
+  }
+}

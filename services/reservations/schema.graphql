@@ -1,0 +1,22 @@
+type Reservation @key(fields: "id") {
+  id: ID!
+  date: String!
+  user: User!
+}
+
+extend type User @key(fields: "id") {
+  id: ID! @external
+}
+
+input ReservationInput {
+  date: String!
+  user: ID!
+}
+
+extend type Query {
+  reservations: [Reservation!]
+}
+
+extend type Mutation {
+  postReservation(reservation: ReservationInput): ID!
+}

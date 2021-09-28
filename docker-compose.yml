@@ -1,0 +1,35 @@
+version: '3'
+services:
+
+  reservations:
+    build:
+      context: ./services/reservations
+      dockerfile: ./Dockerfile
+    ports:
+      - 4001:4001
+    environment:
+      - PORT=4001
+      - MAX_RESERVATIONS=6
+
+  users:
+    build:
+      context: ./services/users
+      dockerfile: ./Dockerfile
+    ports:
+      - 4002:4002
+    environment:
+      - PORT=4002
+
+  gateway:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    depends_on:
+      - reservations
+      - users
+    ports:
+      - 4000:4000
+    environment:
+      - PORT=4000
+      - RESERVATIONS_URL=http://reservations:4001/graphql
+      - USERS_URL=http://users:4002/graphql
