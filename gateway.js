@@ -1,5 +1,5 @@
-import { ApolloServer } from 'apollo-server';
 import { ApolloGateway } from '@apollo/gateway';
+import { ApolloServer } from 'apollo-server';
 
 const gateway = new ApolloGateway({
   serviceList: [

@@ -6,6 +6,7 @@ type Reservation @key(fields: "id") {
 
 extend type User @key(fields: "id") {
   id: ID! @external
+  reservations: [Reservation!]
 }
 
 input ReservationInput {

@@ -1,9 +1,14 @@
 # Reservations
-A simple demo for reservations service.
+A simple POC built with [Apollo Federation](https://www.apollographql.com/docs/federation/).
 
-To run app open a terminal, navigate to the sources and type
+## Development requirements
+- [Docker](https://docker.com)
+- [NodeJS](https://nodejs.org)
+- Your favorite IDE
+
+## Running
+Simply open a terminal and run the following command
 ```sh
 $ docker-compose up --build
 ```
-
-Wait one eternity until node modules installed, open browser `localhost:4000/`, enjoy.
+Wait one eternity until node modules installed, open browser `http://localhost:4000/`, enjoy.

@@ -11,11 +11,12 @@ const resolvers = {
   },
   Mutation: {
     postReservation: async (parent, args, context, info) => {
-      const release = await mutex.acquire(); // Simulate transaction
+      const release = await lock.acquire(); // Simulate transaction
       try {
+        const reservationsForDay = reservations.filter(reservtion => reservtion.date === args.reservation.date);
         const id = reservations.length + 1;
 
-        if (id > process.env.MAX_RESERVATIONS) {
+        if (reservationsForDay.length > process.env.MAX_RESERVATIONS) {
           throw new ApolloError('Maximum reservations reached.', 'CONFLICT');
         }
 
@@ -36,6 +37,9 @@ const resolvers = {
     __resolveReference: reference => reservations.find(reservation => reservation.id === reference.id),
     user: reservation => ({ __typename: "User", id: reservation.user }),
   },
+  User: {
+    reservations: user => reservations.filter(reservation => reservation.user === user.id),
+  },
 };
 
 const server = new ApolloServer({
@@ -53,6 +57,7 @@ const server = new ApolloServer({
 })();
 
 // Demo data...
+const lock = new Mutex();
 const reservations = [
   {
     id: '1',
@@ -75,6 +80,3 @@ const reservations = [
     date: '2021-09-28',
   },
 ];
-
-// Transaction simulation...
-const mutex = new Mutex();
