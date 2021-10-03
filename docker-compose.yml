@@ -10,6 +10,8 @@ services:
     environment:
       - PORT=4001
       - MAX_RESERVATIONS=6
+    volumes:
+      - ./data/reservations.json:/app/reservations.json
 
   users:
     build:
@@ -19,6 +21,8 @@ services:
       - 4002:4002
     environment:
       - PORT=4002
+    volumes:
+      - ./data/users.json:/app/users.json
 
   gateway:
     build:

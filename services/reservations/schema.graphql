@@ -9,15 +9,11 @@ extend type User @key(fields: "id") {
   reservations: [Reservation!]
 }
 
-input ReservationInput {
-  date: String!
-  user: ID!
-}
-
 extend type Query {
   reservations: [Reservation!]
 }
 
 extend type Mutation {
-  postReservation(reservation: ReservationInput): ID!
+  createReservation(date: String!, userId: ID!): ID!
+  removeReservation(id: ID!): Reservation
 }

@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@apollo/federation": "latest",
-    "apollo-server": "latest"
+    "apollo-server": "latest",
+    "uuid": "latest"
   }
 }

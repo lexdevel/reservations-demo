@@ -9,6 +9,7 @@
   "dependencies": {
     "@apollo/federation": "latest",
     "apollo-server": "latest",
-    "async-mutex": "latest"
+    "async-mutex": "latest",
+    "uuid": "latest"
   }
 }
