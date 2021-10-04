@@ -17,6 +17,11 @@ const resolvers = {
     createReservation: async (parent, args, context, info) => {
       const release = await lock.acquire(); // Simulate transaction
       try {
+        const existingReservation = reservations.find(reservation => reservation.date === args.date && reservations.userId === args.userId);
+        if (existingReservation !== null) {
+          throw new ApolloError('The specified user already has reservation on the specified date.', 'CONFLICT');
+        }
+
         const reservationsForDay = reservations.filter(reservation => reservation.date === args.date);
         const id = uuid();
 
@@ -31,7 +36,6 @@ const resolvers = {
         });
 
         return id;
-
       } finally {
         release();
       }
@@ -44,10 +48,7 @@ const resolvers = {
           throw new ApolloError(`Reservation '${args.id}' is not found.`, 'NOT_FOUND');
         }
 
-        const reservation = reservations[index];
-        reservations.splice(index, 1);
-
-        return reservation;
+        return reservations.splice(index, 1).pop();
       } finally {
         release();
       }
