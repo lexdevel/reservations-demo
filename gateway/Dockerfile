@@ -5,4 +5,4 @@ COPY . .
 
 RUN npm install
 
-ENTRYPOINT [ "node", "gateway.js" ]
+ENTRYPOINT [ "node", "index.js" ]

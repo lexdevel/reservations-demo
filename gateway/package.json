@@ -5,7 +5,6 @@
   "type": "module",
   "dependencies": {
     "@apollo/gateway": "latest",
-    "apollo-server": "latest",
-    "graphql": "latest"
+    "apollo-server": "latest"
   }
 }

@@ -26,7 +26,7 @@ services:
 
   gateway:
     build:
-      context: .
+      context: ./gateway
       dockerfile: ./Dockerfile
     depends_on:
       - reservations
