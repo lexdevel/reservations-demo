@@ -1,10 +1,8 @@
-import { buildFederatedSchema } from '@apollo/federation';
+import { buildSubgraphSchema } from '@apollo/federation';
 import { ApolloServer, gql } from 'apollo-server';;
-import { Mutex } from 'async-mutex';
 import { readFileSync } from 'fs';
 
 const users = JSON.parse(readFileSync('./users.json').toString('utf-8'));
-const lock = new Mutex();
 const typeDefs = gql(readFileSync('./schema.graphql').toString('utf-8'));
 
 const resolvers = {
@@ -17,7 +15,7 @@ const resolvers = {
 };
 
 const server = new ApolloServer({
-  schema: buildFederatedSchema([
+  schema: buildSubgraphSchema([
     {
       typeDefs,
       resolvers

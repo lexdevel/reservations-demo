@@ -1,4 +1,4 @@
-import { buildFederatedSchema } from '@apollo/federation';
+import { buildSubgraphSchema } from '@apollo/federation';
 import { ApolloServer, gql } from 'apollo-server';
 import { ApolloError } from 'apollo-server-errors';
 import { Mutex } from 'async-mutex';
@@ -64,7 +64,7 @@ const resolvers = {
 };
 
 const server = new ApolloServer({
-  schema: buildFederatedSchema([
+  schema: buildSubgraphSchema([
     {
       typeDefs,
       resolvers
